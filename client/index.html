@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chatterbox</title>
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/underscore/underscore-min.js"></script>
+    <!-- your scripts -->
+    <script src="env/config.js"></script>
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <h1 class="home">chatterbox</h1>
+      <!-- Your HTML goes here! -->
+    <div id="chats" height="300px"></div>
+      <select class="roomSelect">
+        <option value="newRoom">New room...</option>
+      </select>
+      <p> User
+        <input class="userID" type="text"></input>
+      </p>
+      <p> Message
+        <input class="text" type="text"></input>      
+      </p>
+      <button id="submit">Submit</button>
+    </div>
+  </body>
+</html>

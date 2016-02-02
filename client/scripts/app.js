@@ -4,7 +4,7 @@ $(window).on('load', function(){
 
     user: 'anonymous',
     
-    server: 'https://api.parse.com/1/classes/chatterbox',
+    server: 'http://127.0.0.1:3000/',
 
     roomsObj: {},
 
@@ -78,14 +78,16 @@ $(window).on('load', function(){
     },
 
     send: function(message) {
+      console.log('message from POST: ', message);
       var self = this;
       $.ajax({
         type: "POST",
         url: this.server,
         data: JSON.stringify(message),
         dataType: 'json',
-        success: function() {
-          self.fetch();
+        success: function(message) {
+          console.log('success: ', message);
+          // self.fetch();
         }
       });
     },
@@ -232,8 +234,12 @@ $(window).on('load', function(){
   app.firstInit();
 
 
-  (function fetchLoop() {
-    app.fetch();
-    setTimeout(fetchLoop, 3000);
-  })();
+  // (function fetchLoop() {
+  //   app.fetch();
+  //   setTimeout(fetchLoop, 3000);
+  // })();
+
+
+
+
 });

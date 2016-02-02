@@ -4,10 +4,12 @@
   "main": "server/basic-server.js",
   "author": "Hack Reactor",
   "license": "Copyright 2013, Hack Reactor. All rights reserved.",
+
   "scripts": {
     "start": "node server/basic-server.js",
     "test": "mocha server/spec"
   },
+
   "devDependencies": {
     "mocha": "^1.21.4",
     "request": "^2.34.0",

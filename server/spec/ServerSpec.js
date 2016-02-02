@@ -24,6 +24,7 @@ describe('Node Server Request Listener Function', function() {
   });
 
   it('Should send back parsable stringified JSON', function() {
+        
     var req = new stubs.request('/classes/room1', 'GET');
     var res = new stubs.response();
 

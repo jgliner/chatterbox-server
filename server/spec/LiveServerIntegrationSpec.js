@@ -10,7 +10,13 @@ describe('server', function() {
   });
 
   it('should send back parsable stringified JSON', function(done) {
+
+    console.log('test test');
+
+
     request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+      console.log(body);
+
       expect(JSON.parse.bind(this, body)).to.not.throw();
       done();
     });
@@ -52,7 +58,8 @@ describe('server', function() {
       uri: 'http://127.0.0.1:3000/classes/messages',
       json: {
         username: 'Jono',
-        message: 'Do my bidding!'}
+        message: 'Do my bidding!'
+        s}
     };
 
     request(requestParams, function(error, response, body) {

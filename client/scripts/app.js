@@ -87,7 +87,7 @@ $(window).on('load', function(){
         dataType: 'json',
         success: function(message) {
           console.log('success: ', message);
-          // self.fetch();
+          self.fetch();
         }
       });
     },
@@ -98,11 +98,12 @@ $(window).on('load', function(){
       $.ajax({
         type: "GET",
         url: this.server,
-        data: 'order=-createdAt',
+        // data: 'order=-createdAt',
         success: function(data){
-          var results = data.results;
-          console.log('data', data);
-
+          var results = data;
+          console.log('data', data, results);
+        $('#chats').empty();
+          
           for(var i = 0; i < results.length; i++) {
             var result = results[i];
             var thisPostTime = Date.parse( this._escapeString( result.createdAt ) );
@@ -117,7 +118,6 @@ $(window).on('load', function(){
 
             // if we're in a room and the object in this loop is not in our room, don't bother contiuint on this loop iteration
 
-
             this.roomsObj[roomName] = 0;
             // console.log(this.roomsObj)
             var resultObj = {
@@ -126,7 +126,7 @@ $(window).on('load', function(){
               roomname: roomName
             };
 
-            console.log(this.currentRoom);
+            // console.log(this.currentRoom);
             if (this.currentRoom === undefined) {
               // console.log('current room is undefined')
               // in the home room, don't delte anything. just keep appending as usual
@@ -146,10 +146,14 @@ $(window).on('load', function(){
         
         this._renderRoomList();
         app.periodicInit();
-
         this.scrollAnimate();
         
-        }.bind(this)
+        }.bind(this),
+
+        failure: function() {
+          console.log('fail: ', arguments);
+        }
+      
       });
 
     },
@@ -234,10 +238,10 @@ $(window).on('load', function(){
   app.firstInit();
 
 
-  // (function fetchLoop() {
-  //   app.fetch();
-  //   setTimeout(fetchLoop, 3000);
-  // })();
+  (function fetchLoop() {
+    app.fetch();
+    setTimeout(fetchLoop, 3000);
+  })();
 
 
 

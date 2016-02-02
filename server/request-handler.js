@@ -43,6 +43,7 @@ var requestHandler = function(request, response) {
     body = JSON.parse(body);
     storage.push(body)
   });
+  console.log(storage);
 
   // The outgoing status.
   var statusCode = 200;
@@ -60,6 +61,8 @@ var requestHandler = function(request, response) {
   // which includes the status and all headers.
   response.writeHead(statusCode, headers);
 
+  response.write( JSON.stringify(storage) );
+
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to
   // response.end() will be the body of the response - i.e. what shows
@@ -67,7 +70,7 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  response.end('done');
+  response.end();
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).

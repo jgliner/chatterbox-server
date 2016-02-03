@@ -12,7 +12,7 @@ this file and include it in basic-server.js so that it actually works.
 
 **************************************************************/
 var results = {};
-    results.storage = [];
+results.results = [];
 
 var requestHandler = function(request, response) {
   console.log('-------------------request recieved---------------------');
@@ -23,37 +23,26 @@ var requestHandler = function(request, response) {
 
 
   if (request.method === 'POST') {
-    // console.log('post!')
     // SAVE to server
     request.on('data', function(chunk) {
       body.push(chunk);
     });
 
     request.on('end', function() {
-      body = Buffer.concat(body).toString();
+      // body = Buffer.concat(body).toString();
       body = JSON.parse(body);
-      results.storage.push(body);
+      results.results.push(body);
     });
   }
 
-    // Write header
-    var statusCode = 200;
-    var headers = defaultCorsHeaders;
-    headers['Content-Type'] = "text/json";
-    response.writeHead(statusCode, headers);
+  // Write header
+  var statusCode = request.method === 'GET' ? 200 : 201;
+  var headers = defaultCorsHeaders;
+  headers['Content-Type'] = "text/json";
+  response.writeHead(statusCode, headers);
 
 
-    if (request.method === 'GET') {
-      // console.log('Get .....');
-      console.log(results)
-      response.end(JSON.stringify(results.storage));
-    } else {
-      // console.log('Post .........');
-      response.end(JSON.stringify({}))
-    };
-
-  // console.log(storage);
-  // request.method === 'GET' ? response.end(JSON.stringify(storage)) : response.end({});
+  response.end(JSON.stringify(results));   
 };
 
 var defaultCorsHeaders = {
@@ -63,7 +52,7 @@ var defaultCorsHeaders = {
   "access-control-max-age": 10 // Seconds.
 };
 
-module.exports.handleRequests = requestHandler;
+module.exports.requestHandler = requestHandler;
 module.exports.defaultCorsHeaders = defaultCorsHeaders;
 
 

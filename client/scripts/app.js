@@ -104,8 +104,8 @@ $(window).on('load', function(){
           console.log('data', data, results);
         $('#chats').empty();
           
-          for(var i = 0; i < results.length; i++) {
-            var result = results[i];
+          for(var i = 0; i < results.results.length; i++) {
+            var result = results.results[i];
             var thisPostTime = Date.parse( this._escapeString( result.createdAt ) );
             
             if (thisPostTime <= this.latestPostTime) break;
@@ -138,8 +138,7 @@ $(window).on('load', function(){
               this.addMessage(resultObj);              
             }
           }
-        // sets latestTime to newest post currently on page
-        this.latestPostTime = Date.parse( this._escapeString(results[0].createdAt) );
+
         
         this._clearRoomList();
 

@@ -66,9 +66,8 @@ describe('Node Server Request Listener Function', function() {
     var res = new stubs.response();
 
     handler.requestHandler(req, res);
-
     // Expect 201 Created response status
-    expect(res._responseCode).to.equal(201);
+    expect(JSON.parse(res._responseCode)).to.equal(201);
 
     // Testing for a newline isn't a valid test
     // TODO: Replace with with a valid test
@@ -76,7 +75,7 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
-it('Should respond with messages that were previously posted', function() {
+  it('Should respond with messages that were previously posted', function() {
     var stubMsg = {
       username: 'Jono',
       message: 'Do my bidding!'
